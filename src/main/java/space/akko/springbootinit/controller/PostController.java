@@ -1,7 +1,7 @@
 package space.akko.springbootinit.controller;
 
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.google.gson.Gson;
 import space.akko.springbootinit.annotation.AuthCheck;
 import space.akko.springbootinit.common.BaseResponse;
 import space.akko.springbootinit.common.DeleteRequest;
@@ -44,8 +44,6 @@ public class PostController {
     @Resource
     private UserService userService;
 
-    private final static Gson GSON = new Gson();
-
     // region 增删改查
 
     /**
@@ -64,7 +62,7 @@ public class PostController {
         BeanUtils.copyProperties(postAddRequest, post);
         List<String> tags = postAddRequest.getTags();
         if (tags != null) {
-            post.setTags(GSON.toJson(tags));
+            post.setTags(JSONUtil.toJsonStr(tags));
         }
         postService.validPost(post, true);
         User loginUser = userService.getLoginUser(request);
@@ -118,7 +116,7 @@ public class PostController {
         BeanUtils.copyProperties(postUpdateRequest, post);
         List<String> tags = postUpdateRequest.getTags();
         if (tags != null) {
-            post.setTags(GSON.toJson(tags));
+            post.setTags(JSONUtil.toJsonStr(tags));
         }
         // 参数校验
         postService.validPost(post, false);
@@ -146,6 +144,22 @@ public class PostController {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
         }
         return ResultUtils.success(postService.getPostVO(post, request));
+    }
+
+    /**
+     * 分页获取列表（仅管理员）
+     *
+     * @param postQueryRequest
+     * @return
+     */
+    @PostMapping("/list/page")
+    @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
+    public BaseResponse<Page<Post>> listPostByPage(@RequestBody PostQueryRequest postQueryRequest) {
+        long current = postQueryRequest.getCurrent();
+        long size = postQueryRequest.getPageSize();
+        Page<Post> postPage = postService.page(new Page<>(current, size),
+                postService.getQueryWrapper(postQueryRequest));
+        return ResultUtils.success(postPage);
     }
 
     /**
@@ -226,7 +240,7 @@ public class PostController {
         BeanUtils.copyProperties(postEditRequest, post);
         List<String> tags = postEditRequest.getTags();
         if (tags != null) {
-            post.setTags(GSON.toJson(tags));
+            post.setTags(JSONUtil.toJsonStr(tags));
         }
         // 参数校验
         postService.validPost(post, false);

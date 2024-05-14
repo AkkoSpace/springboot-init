@@ -3,7 +3,6 @@ package space.akko.springbootinit.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.google.gson.Gson;
 import space.akko.springbootinit.common.ErrorCode;
 import space.akko.springbootinit.constant.CommonConstant;
 import space.akko.springbootinit.exception.BusinessException;
@@ -31,7 +30,7 @@ import java.util.stream.Collectors;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections4.CollectionUtils;
+import cn.hutool.core.collection.CollUtil;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.index.query.BoolQueryBuilder;
@@ -53,8 +52,6 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements PostService {
-
-    private final static Gson GSON = new Gson();
 
     @Resource
     private UserService userService;
@@ -112,11 +109,11 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         Long notId = postQueryRequest.getNotId();
         // 拼接查询条件
         if (StringUtils.isNotBlank(searchText)) {
-            queryWrapper.like("title", searchText).or().like("content", searchText);
+            queryWrapper.and(qw -> qw.like("title", searchText).or().like("content", searchText));
         }
         queryWrapper.like(StringUtils.isNotBlank(title), "title", title);
         queryWrapper.like(StringUtils.isNotBlank(content), "content", content);
-        if (CollectionUtils.isNotEmpty(tagList)) {
+        if (CollUtil.isNotEmpty(tagList)) {
             for (String tag : tagList) {
                 queryWrapper.like("tags", "\"" + tag + "\"");
             }
@@ -124,7 +121,6 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         queryWrapper.ne(ObjectUtils.isNotEmpty(notId), "id", notId);
         queryWrapper.eq(ObjectUtils.isNotEmpty(id), "id", id);
         queryWrapper.eq(ObjectUtils.isNotEmpty(userId), "userId", userId);
-        queryWrapper.eq("isDelete", false);
         queryWrapper.orderBy(SqlUtils.validSortField(sortField), sortOrder.equals(CommonConstant.SORT_ORDER_ASC),
                 sortField);
         return queryWrapper;
@@ -158,13 +154,13 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
             boolQueryBuilder.filter(QueryBuilders.termQuery("userId", userId));
         }
         // 必须包含所有标签
-        if (CollectionUtils.isNotEmpty(tagList)) {
+        if (CollUtil.isNotEmpty(tagList)) {
             for (String tag : tagList) {
                 boolQueryBuilder.filter(QueryBuilders.termQuery("tags", tag));
             }
         }
         // 包含任何一个标签即可
-        if (CollectionUtils.isNotEmpty(orTagList)) {
+        if (CollUtil.isNotEmpty(orTagList)) {
             BoolQueryBuilder orTagBoolQueryBuilder = QueryBuilders.boolQuery();
             for (String tag : orTagList) {
                 orTagBoolQueryBuilder.should(QueryBuilders.termQuery("tags", tag));
@@ -262,7 +258,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
     public Page<PostVO> getPostVOPage(Page<Post> postPage, HttpServletRequest request) {
         List<Post> postList = postPage.getRecords();
         Page<PostVO> postVOPage = new Page<>(postPage.getCurrent(), postPage.getSize(), postPage.getTotal());
-        if (CollectionUtils.isEmpty(postList)) {
+        if (CollUtil.isEmpty(postList)) {
             return postVOPage;
         }
         // 1. 关联查询用户信息

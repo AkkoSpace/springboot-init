@@ -2,8 +2,8 @@ package space.akko.springbootinit.service.impl;
 
 import static space.akko.springbootinit.constant.UserConstant.USER_LOGIN_STATE;
 
+import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import space.akko.springbootinit.common.ErrorCode;
 import space.akko.springbootinit.constant.CommonConstant;
@@ -37,7 +37,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     /**
      * 盐值，混淆密码
      */
-    private static final String SALT = "yupi";
+    public static final String SALT = "akko";
 
     @Override
     public long userRegister(String userAccount, String userPassword, String checkPassword) {
@@ -236,7 +236,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public List<UserVO> getUserVO(List<User> userList) {
-        if (CollectionUtils.isEmpty(userList)) {
+        if (CollUtil.isEmpty(userList)) {
             return new ArrayList<>();
         }
         return userList.stream().map(this::getUserVO).collect(Collectors.toList());
