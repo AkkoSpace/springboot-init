@@ -1,7 +1,7 @@
 package space.akko.springbootinit.service;
 
-import space.akko.springbootinit.model.entity.PostThumb;
 import com.baomidou.mybatisplus.extension.service.IService;
+import space.akko.springbootinit.model.entity.PostThumb;
 import space.akko.springbootinit.model.entity.User;
 
 /**

@@ -1,12 +1,14 @@
 package space.akko.springbootinit.model.vo;
 
+import org.springframework.beans.BeanUtils;
+
 import cn.hutool.json.JSONUtil;
+import lombok.Data;
 import space.akko.springbootinit.model.entity.Post;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import lombok.Data;
-import org.springframework.beans.BeanUtils;
 
 /**
  * 帖子视图

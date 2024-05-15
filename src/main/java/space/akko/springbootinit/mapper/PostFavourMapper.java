@@ -1,5 +1,7 @@
 package space.akko.springbootinit.mapper;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -7,7 +9,6 @@ import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import space.akko.springbootinit.model.entity.Post;
 import space.akko.springbootinit.model.entity.PostFavour;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * 帖子收藏数据库操作
@@ -22,11 +23,8 @@ public interface PostFavourMapper extends BaseMapper<PostFavour> {
      * @param favourUserId
      * @return
      */
-    Page<Post> listFavourPostByPage(IPage<Post> page, @Param(Constants.WRAPPER) Wrapper<Post> queryWrapper,
+    Page<Post> listFavourPostByPage(
+            IPage<Post> page,
+            @Param(Constants.WRAPPER) Wrapper<Post> queryWrapper,
             long favourUserId);
-
 }
-
-
-
-

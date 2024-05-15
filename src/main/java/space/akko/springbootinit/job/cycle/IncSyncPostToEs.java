@@ -1,30 +1,31 @@
 package space.akko.springbootinit.job.cycle;
 
+import org.springframework.scheduling.annotation.Scheduled;
+
+import cn.hutool.core.collection.CollUtil;
+import lombok.extern.slf4j.Slf4j;
 import space.akko.springbootinit.esdao.PostEsDao;
 import space.akko.springbootinit.mapper.PostMapper;
 import space.akko.springbootinit.model.dto.post.PostEsDTO;
 import space.akko.springbootinit.model.entity.Post;
+
+import javax.annotation.Resource;
+
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.annotation.Resource;
-import lombok.extern.slf4j.Slf4j;
-import cn.hutool.core.collection.CollUtil;
-import org.springframework.scheduling.annotation.Scheduled;
 
 /**
  * 增量同步帖子到 es
  */
 // todo 取消注释开启任务
-//@Component
+// @Component
 @Slf4j
 public class IncSyncPostToEs {
 
-    @Resource
-    private PostMapper postMapper;
+    @Resource private PostMapper postMapper;
 
-    @Resource
-    private PostEsDao postEsDao;
+    @Resource private PostEsDao postEsDao;
 
     /**
      * 每分钟执行一次
@@ -38,9 +39,8 @@ public class IncSyncPostToEs {
             log.info("no inc post");
             return;
         }
-        List<PostEsDTO> postEsDTOList = postList.stream()
-                .map(PostEsDTO::objToDto)
-                .collect(Collectors.toList());
+        List<PostEsDTO> postEsDTOList =
+                postList.stream().map(PostEsDTO::objToDto).collect(Collectors.toList());
         final int pageSize = 500;
         int total = postEsDTOList.size();
         log.info("IncSyncPostToEs start, total {}", total);

@@ -2,13 +2,15 @@ package space.akko.springbootinit.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
+import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
 import space.akko.springbootinit.model.dto.user.UserQueryRequest;
 import space.akko.springbootinit.model.entity.User;
 import space.akko.springbootinit.model.vo.LoginUserVO;
 import space.akko.springbootinit.model.vo.UserVO;
-import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
-import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
+
+import java.util.List;
 
 /**
  * 用户服务
@@ -114,5 +116,4 @@ public interface UserService extends IService<User> {
      * @return
      */
     QueryWrapper<User> getQueryWrapper(UserQueryRequest userQueryRequest);
-
 }

@@ -1,12 +1,11 @@
 package space.akko.springbootinit.controller;
 
-import space.akko.springbootinit.wxmp.WxMpConstant;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.api.WxConsts.MenuButtonType;
 import me.chanjar.weixin.common.bean.menu.WxMenu;
@@ -16,11 +15,15 @@ import me.chanjar.weixin.mp.api.WxMpMessageRouter;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import space.akko.springbootinit.wxmp.WxMpConstant;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * 微信公众号相关接口
@@ -30,11 +33,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class WxMpController {
 
-    @Resource
-    private WxMpService wxMpService;
+    @Resource private WxMpService wxMpService;
 
-    @Resource
-    private WxMpMessageRouter router;
+    @Resource private WxMpMessageRouter router;
 
     @PostMapping("/")
     public void receiveMessage(HttpServletRequest request, HttpServletResponse response)
@@ -49,8 +50,10 @@ public class WxMpController {
             response.getWriter().println("非法请求");
         }
         // 加密类型
-        String encryptType = StringUtils.isBlank(request.getParameter("encrypt_type")) ? "raw"
-                : request.getParameter("encrypt_type");
+        String encryptType =
+                StringUtils.isBlank(request.getParameter("encrypt_type"))
+                        ? "raw"
+                        : request.getParameter("encrypt_type");
         // 明文消息
         if ("raw".equals(encryptType)) {
             return;
@@ -59,8 +62,11 @@ public class WxMpController {
         if ("aes".equals(encryptType)) {
             // 解密消息
             String msgSignature = request.getParameter("msg_signature");
-            WxMpXmlMessage inMessage = WxMpXmlMessage
-                    .fromEncryptedXml(request.getInputStream(), wxMpService.getWxMpConfigStorage(), timestamp,
+            WxMpXmlMessage inMessage =
+                    WxMpXmlMessage.fromEncryptedXml(
+                            request.getInputStream(),
+                            wxMpService.getWxMpConfigStorage(),
+                            timestamp,
                             nonce,
                             msgSignature);
             log.info("message content = {}", inMessage.getContent());
@@ -69,7 +75,8 @@ public class WxMpController {
             if (outMessage == null) {
                 response.getWriter().write("");
             } else {
-                response.getWriter().write(outMessage.toEncryptedXml(wxMpService.getWxMpConfigStorage()));
+                response.getWriter()
+                        .write(outMessage.toEncryptedXml(wxMpService.getWxMpConfigStorage()));
             }
             return;
         }
@@ -104,8 +111,7 @@ public class WxMpController {
         WxMenuButton wxMenuButton1SubButton1 = new WxMenuButton();
         wxMenuButton1SubButton1.setType(MenuButtonType.VIEW);
         wxMenuButton1SubButton1.setName("跳转页面");
-        wxMenuButton1SubButton1.setUrl(
-                "https://akko.space");
+        wxMenuButton1SubButton1.setUrl("https://akko.space");
         wxMenuButton1.setSubButtons(Collections.singletonList(wxMenuButton1SubButton1));
 
         // 菜单二

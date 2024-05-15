@@ -1,13 +1,16 @@
 package space.akko.springbootinit.model.dto.user;
 
-import java.io.Serializable;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 用户创建请求
  */
 @Data
 public class UserAddRequest implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * 用户昵称
@@ -28,6 +31,4 @@ public class UserAddRequest implements Serializable {
      * 用户角色: user, admin
      */
     private String userRole;
-
-    private static final long serialVersionUID = 1L;
 }

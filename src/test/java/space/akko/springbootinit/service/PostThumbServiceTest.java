@@ -1,11 +1,13 @@
 package space.akko.springbootinit.service;
 
-import space.akko.springbootinit.model.entity.User;
-import javax.annotation.Resource;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import space.akko.springbootinit.model.entity.User;
+
+import javax.annotation.Resource;
 
 /**
  * 帖子点赞服务测试
@@ -13,10 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class PostThumbServiceTest {
 
-    @Resource
-    private PostThumbService postThumbService;
-
     private static final User loginUser = new User();
+    @Resource private PostThumbService postThumbService;
 
     @BeforeAll
     static void setUp() {

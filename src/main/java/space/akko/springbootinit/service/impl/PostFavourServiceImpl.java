@@ -1,5 +1,9 @@
 package space.akko.springbootinit.service.impl;
 
+import org.springframework.aop.framework.AopContext;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -13,10 +17,8 @@ import space.akko.springbootinit.model.entity.PostFavour;
 import space.akko.springbootinit.model.entity.User;
 import space.akko.springbootinit.service.PostFavourService;
 import space.akko.springbootinit.service.PostService;
+
 import javax.annotation.Resource;
-import org.springframework.aop.framework.AopContext;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 帖子收藏服务实现
@@ -25,8 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class PostFavourServiceImpl extends ServiceImpl<PostFavourMapper, PostFavour>
         implements PostFavourService {
 
-    @Resource
-    private PostService postService;
+    @Resource private PostService postService;
 
     /**
      * 帖子收藏
@@ -53,7 +54,8 @@ public class PostFavourServiceImpl extends ServiceImpl<PostFavourMapper, PostFav
     }
 
     @Override
-    public Page<Post> listFavourPostByPage(IPage<Post> page, Wrapper<Post> queryWrapper, long favourUserId) {
+    public Page<Post> listFavourPostByPage(
+            IPage<Post> page, Wrapper<Post> queryWrapper, long favourUserId) {
         if (favourUserId <= 0) {
             return new Page<>();
         }
@@ -81,11 +83,13 @@ public class PostFavourServiceImpl extends ServiceImpl<PostFavourMapper, PostFav
             result = this.remove(postFavourQueryWrapper);
             if (result) {
                 // 帖子收藏数 - 1
-                result = postService.update()
-                        .eq("id", postId)
-                        .gt("favourNum", 0)
-                        .setSql("favourNum = favourNum - 1")
-                        .update();
+                result =
+                        postService
+                                .update()
+                                .eq("id", postId)
+                                .gt("favourNum", 0)
+                                .setSql("favourNum = favourNum - 1")
+                                .update();
                 return result ? -1 : 0;
             } else {
                 throw new BusinessException(ErrorCode.SYSTEM_ERROR);
@@ -95,19 +99,16 @@ public class PostFavourServiceImpl extends ServiceImpl<PostFavourMapper, PostFav
             result = this.save(postFavour);
             if (result) {
                 // 帖子收藏数 + 1
-                result = postService.update()
-                        .eq("id", postId)
-                        .setSql("favourNum = favourNum + 1")
-                        .update();
+                result =
+                        postService
+                                .update()
+                                .eq("id", postId)
+                                .setSql("favourNum = favourNum + 1")
+                                .update();
                 return result ? 1 : 0;
             } else {
                 throw new BusinessException(ErrorCode.SYSTEM_ERROR);
             }
         }
     }
-
 }
-
-
-
-

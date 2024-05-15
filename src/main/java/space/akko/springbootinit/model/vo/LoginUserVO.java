@@ -1,16 +1,17 @@
 package space.akko.springbootinit.model.vo;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * 已登录用户视图（脱敏）
- *
-
  **/
 @Data
 public class LoginUserVO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * 用户 id
@@ -46,6 +47,4 @@ public class LoginUserVO implements Serializable {
      * 更新时间
      */
     private Date updateTime;
-
-    private static final long serialVersionUID = 1L;
 }

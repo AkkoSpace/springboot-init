@@ -1,8 +1,9 @@
 package space.akko.springbootinit.manager;
 
-import javax.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import javax.annotation.Resource;
 
 /**
  * Cos 操作测试
@@ -10,8 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class CosManagerTest {
 
-    @Resource
-    private CosManager cosManager;
+    @Resource private CosManager cosManager;
 
     @Test
     void putObject() {

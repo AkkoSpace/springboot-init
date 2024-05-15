@@ -1,15 +1,15 @@
 package space.akko.springbootinit.model.dto.post;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.json.JSONUtil;
-import space.akko.springbootinit.model.entity.Post;
-import lombok.Data;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
+
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.json.JSONUtil;
+import lombok.Data;
+import space.akko.springbootinit.model.entity.Post;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -17,21 +17,19 @@ import java.util.List;
 
 /**
  * 帖子 ES 包装类
- *
-
  **/
 // todo 取消注释开启 ES（须先配置 ES）
-//@Document(indexName = "post")
+// @Document(indexName = "post")
 @Data
 public class PostEsDTO implements Serializable {
 
     private static final String DATE_TIME_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+    private static final long serialVersionUID = 1L;
 
     /**
      * id
      */
-    @Id
-    private Long id;
+    @Id private Long id;
 
     /**
      * 标题
@@ -66,21 +64,29 @@ public class PostEsDTO implements Serializable {
     /**
      * 创建时间
      */
-    @Field(index = false, store = true, type = FieldType.Date, format = {}, pattern = DATE_TIME_PATTERN)
+    @Field(
+            index = false,
+            store = true,
+            type = FieldType.Date,
+            format = {},
+            pattern = DATE_TIME_PATTERN)
     private Date createTime;
 
     /**
      * 更新时间
      */
-    @Field(index = false, store = true, type = FieldType.Date, format = {}, pattern = DATE_TIME_PATTERN)
+    @Field(
+            index = false,
+            store = true,
+            type = FieldType.Date,
+            format = {},
+            pattern = DATE_TIME_PATTERN)
     private Date updateTime;
 
     /**
      * 是否删除
      */
     private Integer isDelete;
-
-    private static final long serialVersionUID = 1L;
 
     /**
      * 对象转包装类

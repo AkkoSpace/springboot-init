@@ -30,8 +30,8 @@ public interface PostFavourService extends IService<PostFavour> {
      * @param favourUserId
      * @return
      */
-    Page<Post> listFavourPostByPage(IPage<Post> page, Wrapper<Post> queryWrapper,
-            long favourUserId);
+    Page<Post> listFavourPostByPage(
+            IPage<Post> page, Wrapper<Post> queryWrapper, long favourUserId);
 
     /**
      * 帖子收藏（内部服务）

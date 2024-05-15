@@ -4,7 +4,6 @@ package space.akko.springbootinit.common;
  * 自定义错误码
  */
 public enum ErrorCode {
-
     SUCCESS(0, "ok"),
     PARAMS_ERROR(40000, "请求参数错误"),
     NOT_LOGIN_ERROR(40100, "未登录"),
@@ -36,5 +35,4 @@ public enum ErrorCode {
     public String getMessage() {
         return message;
     }
-
 }

@@ -1,29 +1,30 @@
 package space.akko.springbootinit.job.once;
 
+import org.springframework.boot.CommandLineRunner;
+
+import cn.hutool.core.collection.CollUtil;
+import lombok.extern.slf4j.Slf4j;
 import space.akko.springbootinit.esdao.PostEsDao;
 import space.akko.springbootinit.model.dto.post.PostEsDTO;
 import space.akko.springbootinit.model.entity.Post;
 import space.akko.springbootinit.service.PostService;
+
+import javax.annotation.Resource;
+
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.annotation.Resource;
-import lombok.extern.slf4j.Slf4j;
-import cn.hutool.core.collection.CollUtil;
-import org.springframework.boot.CommandLineRunner;
 
 /**
  * 全量同步帖子到 es
  */
 // todo 取消注释开启任务
-//@Component
+// @Component
 @Slf4j
 public class FullSyncPostToEs implements CommandLineRunner {
 
-    @Resource
-    private PostService postService;
+    @Resource private PostService postService;
 
-    @Resource
-    private PostEsDao postEsDao;
+    @Resource private PostEsDao postEsDao;
 
     @Override
     public void run(String... args) {
@@ -31,7 +32,8 @@ public class FullSyncPostToEs implements CommandLineRunner {
         if (CollUtil.isEmpty(postList)) {
             return;
         }
-        List<PostEsDTO> postEsDTOList = postList.stream().map(PostEsDTO::objToDto).collect(Collectors.toList());
+        List<PostEsDTO> postEsDTOList =
+                postList.stream().map(PostEsDTO::objToDto).collect(Collectors.toList());
         final int pageSize = 500;
         int total = postEsDTOList.size();
         log.info("FullSyncPostToEs start, total {}", total);

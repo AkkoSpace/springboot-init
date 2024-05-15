@@ -6,11 +6,11 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
-import java.io.FileWriter;
-import java.io.Writer;
 
 /**
  * 代码生成器
@@ -41,46 +41,84 @@ public class CodeGenerator {
         // 生成路径默认值
         String projectPath = System.getProperty("user.dir");
         // 参考路径，可以自己调整下面的 outputPath
-        String inputPath = projectPath + File.separator + "src/main/resources/templates/模板名称.java.ftl";
+        String inputPath =
+                projectPath + File.separator + "src/main/resources/templates/模板名称.java.ftl";
         String outputPath = String.format("%s/generator/包名/%s类后缀.java", projectPath, upperDataKey);
 
         // 1、生成 Controller
         // 指定生成路径
-        inputPath = projectPath + File.separator + "src/main/resources/templates/TemplateController.java.ftl";
-        outputPath = String.format("%s/generator/controller/%sController.java", projectPath, upperDataKey);
+        inputPath =
+                projectPath
+                        + File.separator
+                        + "src/main/resources/templates/TemplateController.java.ftl";
+        outputPath =
+                String.format(
+                        "%s/generator/controller/%sController.java", projectPath, upperDataKey);
         // 生成
         doGenerate(inputPath, outputPath, dataModel);
         System.out.println("生成 Controller 成功，文件路径：" + outputPath);
 
         // 2、生成 Service 接口和实现类
         // 生成 Service 接口
-        inputPath = projectPath + File.separator + "src/main/resources/templates/TemplateService.java.ftl";
-        outputPath = String.format("%s/generator/service/%sService.java", projectPath, upperDataKey);
+        inputPath =
+                projectPath
+                        + File.separator
+                        + "src/main/resources/templates/TemplateService.java.ftl";
+        outputPath =
+                String.format("%s/generator/service/%sService.java", projectPath, upperDataKey);
         doGenerate(inputPath, outputPath, dataModel);
         System.out.println("生成 Service 接口成功，文件路径：" + outputPath);
         // 生成 Service 实现类
-        inputPath = projectPath + File.separator + "src/main/resources/templates/TemplateServiceImpl.java.ftl";
-        outputPath = String.format("%s/generator/service/impl/%sServiceImpl.java", projectPath, upperDataKey);
+        inputPath =
+                projectPath
+                        + File.separator
+                        + "src/main/resources/templates/TemplateServiceImpl.java.ftl";
+        outputPath =
+                String.format(
+                        "%s/generator/service/impl/%sServiceImpl.java", projectPath, upperDataKey);
         doGenerate(inputPath, outputPath, dataModel);
         System.out.println("生成 Service 实现类成功，文件路径：" + outputPath);
 
         // 3、生成数据模型封装类（包括 DTO 和 VO）
         // 生成 DTO
-        inputPath = projectPath + File.separator + "src/main/resources/templates/model/TemplateAddRequest.java.ftl";
-        outputPath = String.format("%s/generator/model/dto/%sAddRequest.java", projectPath, upperDataKey);
+        inputPath =
+                projectPath
+                        + File.separator
+                        + "src/main/resources/templates/model/TemplateAddRequest.java.ftl";
+        outputPath =
+                String.format(
+                        "%s/generator/model/dto/%sAddRequest.java", projectPath, upperDataKey);
         doGenerate(inputPath, outputPath, dataModel);
-        inputPath = projectPath + File.separator + "src/main/resources/templates/model/TemplateQueryRequest.java.ftl";
-        outputPath = String.format("%s/generator/model/dto/%sQueryRequest.java", projectPath, upperDataKey);
+        inputPath =
+                projectPath
+                        + File.separator
+                        + "src/main/resources/templates/model/TemplateQueryRequest.java.ftl";
+        outputPath =
+                String.format(
+                        "%s/generator/model/dto/%sQueryRequest.java", projectPath, upperDataKey);
         doGenerate(inputPath, outputPath, dataModel);
-        inputPath = projectPath + File.separator + "src/main/resources/templates/model/TemplateEditRequest.java.ftl";
-        outputPath = String.format("%s/generator/model/dto/%sEditRequest.java", projectPath, upperDataKey);
+        inputPath =
+                projectPath
+                        + File.separator
+                        + "src/main/resources/templates/model/TemplateEditRequest.java.ftl";
+        outputPath =
+                String.format(
+                        "%s/generator/model/dto/%sEditRequest.java", projectPath, upperDataKey);
         doGenerate(inputPath, outputPath, dataModel);
-        inputPath = projectPath + File.separator + "src/main/resources/templates/model/TemplateUpdateRequest.java.ftl";
-        outputPath = String.format("%s/generator/model/dto/%sUpdateRequest.java", projectPath, upperDataKey);
+        inputPath =
+                projectPath
+                        + File.separator
+                        + "src/main/resources/templates/model/TemplateUpdateRequest.java.ftl";
+        outputPath =
+                String.format(
+                        "%s/generator/model/dto/%sUpdateRequest.java", projectPath, upperDataKey);
         doGenerate(inputPath, outputPath, dataModel);
         System.out.println("生成 DTO 成功，文件路径：" + outputPath);
         // 生成 VO
-        inputPath = projectPath + File.separator + "src/main/resources/templates/model/TemplateVO.java.ftl";
+        inputPath =
+                projectPath
+                        + File.separator
+                        + "src/main/resources/templates/model/TemplateVO.java.ftl";
         outputPath = String.format("%s/generator/model/vo/%sVO.java", projectPath, upperDataKey);
         doGenerate(inputPath, outputPath, dataModel);
         System.out.println("生成 VO 成功，文件路径：" + outputPath);
@@ -95,7 +133,8 @@ public class CodeGenerator {
      * @throws IOException
      * @throws TemplateException
      */
-    public static void doGenerate(String inputPath, String outputPath, Object model) throws IOException, TemplateException {
+    public static void doGenerate(String inputPath, String outputPath, Object model)
+            throws IOException, TemplateException {
         // new 出 Configuration 对象，参数为 FreeMarker 版本号
         Configuration configuration = new Configuration(Configuration.VERSION_2_3_31);
 

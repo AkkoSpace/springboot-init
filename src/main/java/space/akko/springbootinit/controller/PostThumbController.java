@@ -1,5 +1,11 @@
 package space.akko.springbootinit.controller;
 
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import lombok.extern.slf4j.Slf4j;
 import space.akko.springbootinit.common.BaseResponse;
 import space.akko.springbootinit.common.ErrorCode;
 import space.akko.springbootinit.common.ResultUtils;
@@ -8,13 +14,9 @@ import space.akko.springbootinit.model.dto.postthumb.PostThumbAddRequest;
 import space.akko.springbootinit.model.entity.User;
 import space.akko.springbootinit.service.PostThumbService;
 import space.akko.springbootinit.service.UserService;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 帖子点赞接口
@@ -24,11 +26,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class PostThumbController {
 
-    @Resource
-    private PostThumbService postThumbService;
+    @Resource private PostThumbService postThumbService;
 
-    @Resource
-    private UserService userService;
+    @Resource private UserService userService;
 
     /**
      * 点赞 / 取消点赞
@@ -38,8 +38,8 @@ public class PostThumbController {
      * @return resultNum 本次点赞变化数
      */
     @PostMapping("/")
-    public BaseResponse<Integer> doThumb(@RequestBody PostThumbAddRequest postThumbAddRequest,
-            HttpServletRequest request) {
+    public BaseResponse<Integer> doThumb(
+            @RequestBody PostThumbAddRequest postThumbAddRequest, HttpServletRequest request) {
         if (postThumbAddRequest == null || postThumbAddRequest.getPostId() <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
@@ -49,5 +49,4 @@ public class PostThumbController {
         int result = postThumbService.doPostThumb(postId, loginUser);
         return ResultUtils.success(result);
     }
-
 }

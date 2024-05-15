@@ -1,5 +1,9 @@
 package space.akko.springbootinit.service.impl;
 
+import org.springframework.aop.framework.AopContext;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import space.akko.springbootinit.common.ErrorCode;
@@ -10,10 +14,8 @@ import space.akko.springbootinit.model.entity.PostThumb;
 import space.akko.springbootinit.model.entity.User;
 import space.akko.springbootinit.service.PostService;
 import space.akko.springbootinit.service.PostThumbService;
+
 import javax.annotation.Resource;
-import org.springframework.aop.framework.AopContext;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 帖子点赞服务实现
@@ -22,8 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class PostThumbServiceImpl extends ServiceImpl<PostThumbMapper, PostThumb>
         implements PostThumbService {
 
-    @Resource
-    private PostService postService;
+    @Resource private PostService postService;
 
     /**
      * 点赞
@@ -70,11 +71,13 @@ public class PostThumbServiceImpl extends ServiceImpl<PostThumbMapper, PostThumb
             result = this.remove(thumbQueryWrapper);
             if (result) {
                 // 点赞数 - 1
-                result = postService.update()
-                        .eq("id", postId)
-                        .gt("thumbNum", 0)
-                        .setSql("thumbNum = thumbNum - 1")
-                        .update();
+                result =
+                        postService
+                                .update()
+                                .eq("id", postId)
+                                .gt("thumbNum", 0)
+                                .setSql("thumbNum = thumbNum - 1")
+                                .update();
                 return result ? -1 : 0;
             } else {
                 throw new BusinessException(ErrorCode.SYSTEM_ERROR);
@@ -84,19 +87,16 @@ public class PostThumbServiceImpl extends ServiceImpl<PostThumbMapper, PostThumb
             result = this.save(postThumb);
             if (result) {
                 // 点赞数 + 1
-                result = postService.update()
-                        .eq("id", postId)
-                        .setSql("thumbNum = thumbNum + 1")
-                        .update();
+                result =
+                        postService
+                                .update()
+                                .eq("id", postId)
+                                .setSql("thumbNum = thumbNum + 1")
+                                .update();
                 return result ? 1 : 0;
             } else {
                 throw new BusinessException(ErrorCode.SYSTEM_ERROR);
             }
         }
     }
-
 }
-
-
-
-

@@ -1,6 +1,14 @@
 package space.akko.springbootinit.controller;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
 import cn.hutool.core.io.FileUtil;
+import lombok.extern.slf4j.Slf4j;
 import space.akko.springbootinit.common.BaseResponse;
 import space.akko.springbootinit.common.ErrorCode;
 import space.akko.springbootinit.common.ResultUtils;
@@ -11,17 +19,12 @@ import space.akko.springbootinit.model.dto.file.UploadFileRequest;
 import space.akko.springbootinit.model.entity.User;
 import space.akko.springbootinit.model.enums.FileUploadBizEnum;
 import space.akko.springbootinit.service.UserService;
-import java.io.File;
-import java.util.Arrays;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.util.Arrays;
 
 /**
  * 文件接口
@@ -31,11 +34,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 public class FileController {
 
-    @Resource
-    private UserService userService;
+    @Resource private UserService userService;
 
-    @Resource
-    private CosManager cosManager;
+    @Resource private CosManager cosManager;
 
     /**
      * 文件上传
@@ -46,8 +47,10 @@ public class FileController {
      * @return
      */
     @PostMapping("/upload")
-    public BaseResponse<String> uploadFile(@RequestPart("file") MultipartFile multipartFile,
-            UploadFileRequest uploadFileRequest, HttpServletRequest request) {
+    public BaseResponse<String> uploadFile(
+            @RequestPart("file") MultipartFile multipartFile,
+            UploadFileRequest uploadFileRequest,
+            HttpServletRequest request) {
         String biz = uploadFileRequest.getBiz();
         FileUploadBizEnum fileUploadBizEnum = FileUploadBizEnum.getEnumByValue(biz);
         if (fileUploadBizEnum == null) {
@@ -58,7 +61,9 @@ public class FileController {
         // 文件目录：根据业务、用户来划分
         String uuid = RandomStringUtils.randomAlphanumeric(8);
         String filename = uuid + "-" + multipartFile.getOriginalFilename();
-        String filepath = String.format("/%s/%s/%s", fileUploadBizEnum.getValue(), loginUser.getId(), filename);
+        String filepath =
+                String.format(
+                        "/%s/%s/%s", fileUploadBizEnum.getValue(), loginUser.getId(), filename);
         File file = null;
         try {
             // 上传文件

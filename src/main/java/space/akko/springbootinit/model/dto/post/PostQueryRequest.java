@@ -1,10 +1,11 @@
 package space.akko.springbootinit.model.dto.post;
 
-import space.akko.springbootinit.common.PageRequest;
-import java.io.Serializable;
-import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import space.akko.springbootinit.common.PageRequest;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * 查询请求
@@ -12,6 +13,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class PostQueryRequest extends PageRequest implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * id
@@ -57,6 +60,4 @@ public class PostQueryRequest extends PageRequest implements Serializable {
      * 收藏用户 id
      */
     private Long favourUserId;
-
-    private static final long serialVersionUID = 1L;
 }

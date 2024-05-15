@@ -1,14 +1,17 @@
 package space.akko.springbootinit.model.dto.post;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.List;
-import lombok.Data;
 
 /**
  * 创建请求
  */
 @Data
 public class PostAddRequest implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * 标题
@@ -24,6 +27,4 @@ public class PostAddRequest implements Serializable {
      * 标签列表
      */
     private List<String> tags;
-
-    private static final long serialVersionUID = 1L;
 }

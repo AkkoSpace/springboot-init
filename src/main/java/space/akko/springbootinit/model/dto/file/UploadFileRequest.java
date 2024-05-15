@@ -1,7 +1,8 @@
 package space.akko.springbootinit.model.dto.file;
 
-import java.io.Serializable;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 文件上传请求
@@ -9,10 +10,10 @@ import lombok.Data;
 @Data
 public class UploadFileRequest implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * 业务
      */
     private String biz;
-
-    private static final long serialVersionUID = 1L;
 }

@@ -1,12 +1,15 @@
 package space.akko.springbootinit.mapper;
 
-import space.akko.springbootinit.model.entity.Post;
-import java.util.Date;
-import java.util.List;
-import javax.annotation.Resource;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import space.akko.springbootinit.model.entity.Post;
+
+import javax.annotation.Resource;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * 帖子数据库操作测试
@@ -14,8 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class PostMapperTest {
 
-    @Resource
-    private PostMapper postMapper;
+    @Resource private PostMapper postMapper;
 
     @Test
     void listPostWithDelete() {

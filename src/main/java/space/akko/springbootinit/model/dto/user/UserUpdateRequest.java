@@ -1,13 +1,16 @@
 package space.akko.springbootinit.model.dto.user;
 
-import java.io.Serializable;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 用户更新请求
  */
 @Data
 public class UserUpdateRequest implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     /**
      * id
      */
@@ -32,6 +35,4 @@ public class UserUpdateRequest implements Serializable {
      * 用户角色：user/admin/ban
      */
     private String userRole;
-
-    private static final long serialVersionUID = 1L;
 }
