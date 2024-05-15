@@ -1,12 +1,5 @@
 package space.akko.springbootinit.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import lombok.extern.slf4j.Slf4j;
 import space.akko.springbootinit.common.BaseResponse;
 import space.akko.springbootinit.common.ErrorCode;
 import space.akko.springbootinit.common.ResultUtils;
@@ -21,6 +14,14 @@ import space.akko.springbootinit.model.vo.PostVO;
 import space.akko.springbootinit.service.PostFavourService;
 import space.akko.springbootinit.service.PostService;
 import space.akko.springbootinit.service.UserService;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;

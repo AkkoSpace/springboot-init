@@ -1,13 +1,14 @@
 package space.akko.springbootinit.job.cycle;
 
-import org.springframework.scheduling.annotation.Scheduled;
-
-import cn.hutool.core.collection.CollUtil;
-import lombok.extern.slf4j.Slf4j;
 import space.akko.springbootinit.esdao.PostEsDao;
 import space.akko.springbootinit.mapper.PostMapper;
 import space.akko.springbootinit.model.dto.post.PostEsDTO;
 import space.akko.springbootinit.model.entity.Post;
+
+import org.springframework.scheduling.annotation.Scheduled;
+
+import cn.hutool.core.collection.CollUtil;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Resource;
 

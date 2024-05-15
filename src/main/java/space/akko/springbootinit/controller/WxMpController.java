@@ -1,5 +1,7 @@
 package space.akko.springbootinit.controller;
 
+import space.akko.springbootinit.wxmp.WxMpConstant;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +17,6 @@ import me.chanjar.weixin.mp.api.WxMpMessageRouter;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
-import space.akko.springbootinit.wxmp.WxMpConstant;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;

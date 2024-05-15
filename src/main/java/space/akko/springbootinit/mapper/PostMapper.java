@@ -1,7 +1,8 @@
 package space.akko.springbootinit.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import space.akko.springbootinit.model.entity.Post;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.Date;
 import java.util.List;

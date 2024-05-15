@@ -1,11 +1,5 @@
 package space.akko.springbootinit.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import lombok.extern.slf4j.Slf4j;
 import space.akko.springbootinit.common.BaseResponse;
 import space.akko.springbootinit.common.ErrorCode;
 import space.akko.springbootinit.common.ResultUtils;
@@ -14,6 +8,13 @@ import space.akko.springbootinit.model.dto.postthumb.PostThumbAddRequest;
 import space.akko.springbootinit.model.entity.User;
 import space.akko.springbootinit.service.PostThumbService;
 import space.akko.springbootinit.service.UserService;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;

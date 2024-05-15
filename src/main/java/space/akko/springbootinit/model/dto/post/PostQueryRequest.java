@@ -1,8 +1,9 @@
 package space.akko.springbootinit.model.dto.post;
 
+import space.akko.springbootinit.common.PageRequest;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import space.akko.springbootinit.common.PageRequest;
 
 import java.io.Serializable;
 import java.util.List;

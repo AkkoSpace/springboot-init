@@ -1,5 +1,12 @@
 package space.akko.springbootinit.aop;
 
+import space.akko.springbootinit.annotation.AuthCheck;
+import space.akko.springbootinit.common.ErrorCode;
+import space.akko.springbootinit.exception.BusinessException;
+import space.akko.springbootinit.model.entity.User;
+import space.akko.springbootinit.model.enums.UserRoleEnum;
+import space.akko.springbootinit.service.UserService;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -7,13 +14,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
-import space.akko.springbootinit.annotation.AuthCheck;
-import space.akko.springbootinit.common.ErrorCode;
-import space.akko.springbootinit.exception.BusinessException;
-import space.akko.springbootinit.model.entity.User;
-import space.akko.springbootinit.model.enums.UserRoleEnum;
-import space.akko.springbootinit.service.UserService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;

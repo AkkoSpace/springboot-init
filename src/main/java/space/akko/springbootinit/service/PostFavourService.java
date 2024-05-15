@@ -1,12 +1,13 @@
 package space.akko.springbootinit.service;
 
+import space.akko.springbootinit.model.entity.Post;
+import space.akko.springbootinit.model.entity.PostFavour;
+import space.akko.springbootinit.model.entity.User;
+
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import space.akko.springbootinit.model.entity.Post;
-import space.akko.springbootinit.model.entity.PostFavour;
-import space.akko.springbootinit.model.entity.User;
 
 /**
  * 帖子收藏服务

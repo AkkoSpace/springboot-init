@@ -1,11 +1,12 @@
 package space.akko.springbootinit.manager;
 
+import space.akko.springbootinit.config.CosClientConfig;
+
 import org.springframework.stereotype.Component;
 
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.model.PutObjectRequest;
 import com.qcloud.cos.model.PutObjectResult;
-import space.akko.springbootinit.config.CosClientConfig;
 
 import javax.annotation.Resource;
 

@@ -1,7 +1,8 @@
 package space.akko.springbootinit.common;
 
-import lombok.Data;
 import space.akko.springbootinit.constant.CommonConstant;
+
+import lombok.Data;
 
 /**
  * 分页请求

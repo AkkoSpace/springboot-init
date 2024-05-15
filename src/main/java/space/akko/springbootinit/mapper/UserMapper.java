@@ -1,7 +1,8 @@
 package space.akko.springbootinit.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import space.akko.springbootinit.model.entity.User;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * 用户数据库操作

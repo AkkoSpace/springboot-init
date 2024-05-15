@@ -1,5 +1,9 @@
 package space.akko.springbootinit.wxmp;
 
+import space.akko.springbootinit.wxmp.handler.EventHandler;
+import space.akko.springbootinit.wxmp.handler.MessageHandler;
+import space.akko.springbootinit.wxmp.handler.SubscribeHandler;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -7,9 +11,6 @@ import me.chanjar.weixin.common.api.WxConsts.EventType;
 import me.chanjar.weixin.common.api.WxConsts.XmlMsgType;
 import me.chanjar.weixin.mp.api.WxMpMessageRouter;
 import me.chanjar.weixin.mp.api.WxMpService;
-import space.akko.springbootinit.wxmp.handler.EventHandler;
-import space.akko.springbootinit.wxmp.handler.MessageHandler;
-import space.akko.springbootinit.wxmp.handler.SubscribeHandler;
 
 import javax.annotation.Resource;
 

@@ -1,10 +1,10 @@
 package space.akko.springbootinit.mapper;
 
+import space.akko.springbootinit.model.entity.Post;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import space.akko.springbootinit.model.entity.Post;
 
 import javax.annotation.Resource;
 

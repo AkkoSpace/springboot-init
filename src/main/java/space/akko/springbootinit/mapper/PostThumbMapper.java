@@ -1,7 +1,8 @@
 package space.akko.springbootinit.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import space.akko.springbootinit.model.entity.PostThumb;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * 帖子点赞数据库操作

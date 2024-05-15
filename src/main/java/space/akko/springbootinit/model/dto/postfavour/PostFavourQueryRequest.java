@@ -1,9 +1,10 @@
 package space.akko.springbootinit.model.dto.postfavour;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import space.akko.springbootinit.common.PageRequest;
 import space.akko.springbootinit.model.dto.post.PostQueryRequest;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 

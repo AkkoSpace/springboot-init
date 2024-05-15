@@ -1,11 +1,11 @@
 package space.akko.springbootinit.service;
 
+import space.akko.springbootinit.model.entity.User;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import space.akko.springbootinit.model.entity.User;
 
 import javax.annotation.Resource;
 

@@ -1,5 +1,7 @@
 package space.akko.springbootinit.model.dto.post;
 
+import space.akko.springbootinit.model.entity.Post;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.annotation.Id;
@@ -9,7 +11,6 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.json.JSONUtil;
 import lombok.Data;
-import space.akko.springbootinit.model.entity.Post;
 
 import java.io.Serializable;
 import java.util.Date;
